@@ -8,6 +8,14 @@ import java.util.List;
 
 
 public class Clinique {
+    public TriageType getTypeTriageMedecin() {
+        return typeTriageMedecin;
+    }
+
+    public TriageType getTypeTriageRadiokogy() {
+        return typeTriageRadiokogy;
+    }
+
     private TriageType typeTriageMedecin;
     private TriageType typeTriageRadiokogy;
     List <Patient> queueListMedecin = new ArrayList<>();
@@ -16,6 +24,10 @@ public class Clinique {
     public Clinique(TriageType triageType, TriageType triageType1) {
         this.typeTriageMedecin = triageType;
         this.typeTriageRadiokogy = triageType1;
+    }
+
+    public Clinique (TriageType triageType){
+        this.typeTriageMedecin = triageType;
     }
     public Clinique(){
         this.typeTriageMedecin = TriageType.FIFO;
@@ -79,5 +91,9 @@ public class Clinique {
         }
     private void triage_fifo (Patient p, List<Patient> queue){
         queue.add(p);
+    }
+
+    public int position(String name, int gravity) {
+        return this.positionQueueMedecin(name,gravity,VisibleSymptom.NAN);
     }
 }
