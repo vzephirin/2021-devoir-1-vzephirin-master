@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.devoir1.clinique;
 
+import ca.ulaval.glo4002.devoir1.clinique.enumeration.TriageType;
 import org.junit.jupiter.api.Test;
 import ca.ulaval.glo4002.devoir1.clinique.enumeration.VisibleSymptom;
 
@@ -129,5 +130,86 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
         assertEquals(position1_expected, positionName1 );
         assertEquals(position2_expected, positionName2 );
     }
+    @Test
+    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionThanPatientLessprority(){
+    Clinique clinique = new Clinique(TriageType.GRAVITY,TriageType.FIFO);
+
+        String nom1 =" jean";
+        int position1_expected =1;
+        int gravitynom1 = 2;
+
+        clinique.triage(nom1, gravitynom1 , VisibleSymptom.FLU);
+
+        String nom2 =" pierre";
+        int position2_expected =0;
+        int gravitynom2 = 7;
+
+        clinique.triage(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+
+        int positionName1 = clinique.positionQueueMedecin(nom1, gravitynom1, VisibleSymptom.FLU);
+        int positionName2 = clinique.positionQueueMedecin(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+
+        assertEquals(position1_expected, positionName1 );
+        assertEquals(position2_expected, positionName2 );
+    }
+
+    @Test
+    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionQuueMedecinAndSecondPositionQuueRadiology(){
+        Clinique clinique = new Clinique(TriageType.GRAVITY,TriageType.FIFO);
+
+        String nom1 =" jean";
+        int position1_expected_queue_Medecin =1;
+        int position1_expected_queue_Radiologie =0;
+        int gravitynom1 = 4;
+
+        clinique.triage(nom1, gravitynom1 , VisibleSymptom.SPRAIN);
+
+        String nom2 =" pierre";
+        int position2_expected_queue_Medecin =0;
+        int position2_expected_queue_Radiologie =1;
+        int gravitynom2 = 7;
+
+        clinique.triage(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+
+        int positionName1 = clinique.positionQueueMedecin(nom1, gravitynom1, VisibleSymptom.SPRAIN);
+        int positionName2 = clinique.positionQueueMedecin(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+        int positionName1_r = clinique.positionQueueRadiology(nom1, gravitynom1, VisibleSymptom.SPRAIN);
+        int positionName2_r = clinique.positionQueueRadiology(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+
+        assertEquals(position1_expected_queue_Medecin, positionName1 );
+        assertEquals(position2_expected_queue_Medecin, positionName2 );
+        assertEquals(position1_expected_queue_Radiologie, positionName1_r );
+        assertEquals(position2_expected_queue_Radiologie, positionName2_r );
+    }
+
+    @Test
+    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionQuueMedecinAndFirstPositionQuueRadiology(){
+        Clinique clinique = new Clinique(TriageType.GRAVITY,TriageType.GRAVITY);
+
+        String nom1 =" jean";
+        int position1_expected_queue_Medecin =1;
+        int position1_expected_queue_Radiologie =1;
+        int gravitynom1 = 4;
+
+        clinique.triage(nom1, gravitynom1 , VisibleSymptom.SPRAIN);
+
+        String nom2 =" pierre";
+        int position2_expected_queue_Medecin =0;
+        int position2_expected_queue_Radiologie =0;
+        int gravitynom2 = 7;
+
+        clinique.triage(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+
+        int positionName1 = clinique.positionQueueMedecin(nom1, gravitynom1, VisibleSymptom.SPRAIN);
+        int positionName2 = clinique.positionQueueMedecin(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+        int positionName1_r = clinique.positionQueueRadiology(nom1, gravitynom1, VisibleSymptom.SPRAIN);
+        int positionName2_r = clinique.positionQueueRadiology(nom2, gravitynom2 , VisibleSymptom.BROKEN_BONE);
+
+        assertEquals(position1_expected_queue_Medecin, positionName1 );
+        assertEquals(position2_expected_queue_Medecin, positionName2 );
+        assertEquals(position1_expected_queue_Radiologie, positionName1_r );
+        assertEquals(position2_expected_queue_Radiologie, positionName2_r );
+    }
+
 
 }
