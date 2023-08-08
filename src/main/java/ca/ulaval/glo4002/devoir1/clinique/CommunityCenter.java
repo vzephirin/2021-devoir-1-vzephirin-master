@@ -1,6 +1,8 @@
-package ca.ulaval.glo4002.devoir1.clinique.enumeration;
+package ca.ulaval.glo4002.devoir1.clinique;
 
 import ca.ulaval.glo4002.devoir1.clinique.Clinique;
+import ca.ulaval.glo4002.devoir1.clinique.enumeration.TriageType;
+import ca.ulaval.glo4002.devoir1.clinique.enumeration.VisibleSymptom;
 
 public class CommunityCenter extends Clinique {
 
@@ -9,7 +11,7 @@ public class CommunityCenter extends Clinique {
     }
 
     public void triagePatient(String name, int gravity) {
-        this.triage(name,gravity,VisibleSymptom.NAN);
+        this.triage(name,gravity, VisibleSymptom.NAN);
     }
 
     public boolean fileisEmpty() {
