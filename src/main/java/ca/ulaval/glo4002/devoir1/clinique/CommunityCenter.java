@@ -10,7 +10,7 @@ public class CommunityCenter extends Clinique {
         super(triageType);
     }
 
-    public void triagePatient(String name, int gravity) {
+    public void triagePatient(String name, int gravity) throws Exception {
         this.triage(name,gravity, VisibleSymptom.NAN);
     }
 

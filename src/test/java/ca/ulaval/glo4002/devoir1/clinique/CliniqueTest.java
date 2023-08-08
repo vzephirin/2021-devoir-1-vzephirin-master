@@ -24,7 +24,7 @@ class CliniqueTest {
     assertTrue(statutClinique);
 }
 @Test
-public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
+public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty() throws Exception {
     Clinique clinique = new Clinique();
     String nom =" jean";
     int gravity = 3;
@@ -34,7 +34,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
 }
 
 @Test
-   public void unPatientRadiologieQuandPlacement_FileRadiologyNotEmpty(){
+   public void unPatientRadiologieQuandPlacement_FileRadiologyNotEmpty() throws Exception {
         Clinique clinique = new Clinique();
         String nom =" jean";
         int gravity = 3;
@@ -44,7 +44,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
     }
 
     @Test
-    public void unPatientMedecinQuandPlacement_FileRadiology_shouldbeEmpty(){
+    public void unPatientMedecinQuandPlacement_FileRadiology_shouldbeEmpty() throws Exception {
         Clinique clinique = new Clinique();
         String nom =" jean";
         int gravity = 3;
@@ -53,7 +53,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
         assertTrue(clinique.queueRadiology_isEmpty());
     }
 @Test
-    public void unPatientMedecinEtRadiologieQuandPlacement_FileRadiology_shouldbeNotEmpty(){
+    public void unPatientMedecinEtRadiologieQuandPlacement_FileRadiology_shouldbeNotEmpty() throws Exception {
         Clinique clinique = new Clinique();
         String nom =" jean";
         int gravity = 3;
@@ -64,7 +64,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
     }
 
     @Test
-    public void unPatientMedecinQuandPlacement_shouldbeFirstPositionQueueMedecin(){
+    public void unPatientMedecinQuandPlacement_shouldbeFirstPositionQueueMedecin() throws Exception {
         Clinique clinique = new Clinique();
         String nom =" jean";
         int position_expected =0;
@@ -77,7 +77,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
     }
 
     @Test
-    public void plusieursPatientsMedecinQuandPlacement_shouldbeInOrderFIFO(){
+    public void plusieursPatientsMedecinQuandPlacement_shouldbeInOrderFIFO() throws Exception {
         Clinique clinique = new Clinique();
         String nom1 =" jean";
         int position1_expected =0;
@@ -98,7 +98,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
     }
 
     @Test
-    public void unPatientRadiologyQuandPlacement_shouldbeFirstPositionRadiology(){
+    public void unPatientRadiologyQuandPlacement_shouldbeFirstPositionRadiology() throws Exception {
         Clinique clinique = new Clinique();
         String nom =" jean";
         int position_expected =0;
@@ -111,7 +111,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
     }
 
     @Test
-    public void plusieursPatientsRadiologieQuandPlacement_shouldbeInOrderFIFO(){
+    public void plusieursPatientsRadiologieQuandPlacement_shouldbeInOrderFIFO() throws Exception {
         Clinique clinique = new Clinique();
         String nom1 =" jean";
         int position1_expected =0;
@@ -131,7 +131,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
         assertEquals(position2_expected, positionName2 );
     }
     @Test
-    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionThanPatientLessprority(){
+    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionThanPatientLessprority() throws Exception {
     Clinique clinique = new Clinique(TriageType.GRAVITY,TriageType.FIFO);
 
         String nom1 =" jean";
@@ -154,7 +154,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
     }
 
     @Test
-    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionQuueMedecinAndSecondPositionQuueRadiology(){
+    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionQuueMedecinAndSecondPositionQuueRadiology() throws Exception {
         Clinique clinique = new Clinique(TriageType.GRAVITY,TriageType.FIFO);
 
         String nom1 =" jean";
@@ -183,7 +183,7 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
     }
 
     @Test
-    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionQuueMedecinAndFirstPositionQuueRadiology(){
+    public void unPatientPlusPrioritaire_QuandTrier_soulbeFisrtpositionQuueMedecinAndFirstPositionQuueRadiology() throws Exception {
         Clinique clinique = new Clinique(TriageType.GRAVITY,TriageType.GRAVITY);
 
         String nom1 =" jean";
@@ -209,6 +209,15 @@ public void unPatientMedecinQuandPlacement_FileMedecinNotEmpty(){
         assertEquals(position2_expected_queue_Medecin, positionName2 );
         assertEquals(position1_expected_queue_Radiologie, positionName1_r );
         assertEquals(position2_expected_queue_Radiologie, positionName2_r );
+    }
+    @Test
+    public void unpatientCoronavirus_quandTrier_devraitGenereException(){
+    Clinique clinique = new Clinique();
+    String name ="jean";
+    int gravity = 1;
+    Exception exception = assertThrows(Exception.class, () -> clinique.triage(name,gravity,VisibleSymptom.CORONAVIRUS));
+    assertEquals("CORONAVIRUS_IS_NOT_ACCEPTED", exception.getMessage());
+
     }
 
 

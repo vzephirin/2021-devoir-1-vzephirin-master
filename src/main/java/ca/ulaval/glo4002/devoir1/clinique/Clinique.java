@@ -43,7 +43,10 @@ public class Clinique {
         return queueListMedecin.isEmpty();
     }
 
-    public void triage(String nom, int gravity, VisibleSymptom visibleSymptom) {
+    public void triage(String nom, int gravity, VisibleSymptom visibleSymptom) throws Exception {
+        if (visibleSymptom == VisibleSymptom.CORONAVIRUS){
+            throw new Exception("CORONAVIRUS_IS_NOT_ACCEPTED");
+        }
        Patient patient = new Patient(nom,gravity,visibleSymptom);
 
         if (visibleSymptom.equals(VisibleSymptom.BROKEN_BONE) || visibleSymptom.equals(VisibleSymptom.SPRAIN)) {

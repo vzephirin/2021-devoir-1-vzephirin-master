@@ -12,7 +12,7 @@ class CommunityCenterTest {
         assertTrue(comunity.fileisEmpty());
     }
 @Test
-    public void unpatientCommunity_QuandTrier_shoulbeNotEmpty(){
+    public void unpatientCommunity_QuandTrier_shoulbeNotEmpty() throws Exception {
     CommunityCenter comunity = new CommunityCenter(TriageType.FIFO);
     String name ="Jean";
     int gravity = 1;
@@ -20,7 +20,7 @@ class CommunityCenterTest {
     assertFalse(comunity.fileisEmpty());
 }
 @Test
-    public void plusieurspatientCommunity_QuandTrier_soulbeInOrderFIFO(){
+    public void plusieurspatientCommunity_QuandTrier_soulbeInOrderFIFO() throws Exception {
     CommunityCenter community = new CommunityCenter(TriageType.FIFO);
     String name ="Jean";
     int gravity = 4;
@@ -39,7 +39,7 @@ class CommunityCenterTest {
 }
 
     @Test
-    public void plusieurspatientCommunity_QuandTrier_soulbeInOrderGravity(){
+    public void plusieurspatientCommunity_QuandTrier_soulbeInOrderGravity() throws Exception {
         CommunityCenter community = new CommunityCenter(TriageType.GRAVITY);
         String name ="Jean";
         int gravity = 4;
